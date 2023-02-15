@@ -171,6 +171,11 @@ function generatePassword() {
     console.log(possibleCharacters);
     console.log(guranteeCharacters);
   }
+
+  for (var i = 0; i < pwdOptionsObj.length; i++) {
+    finalPassword.push(getRandom(possibleCharacters));
+  }
+  return finalPassword.join("");
 }
 
 // Assignment Code
