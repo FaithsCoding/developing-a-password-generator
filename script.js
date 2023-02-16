@@ -196,7 +196,7 @@ function generatePassword() {
 // The query selector is a method used to return elements that match with another selector.
 var generateBtn = document.querySelector("#generate");
 
-// This function is writing the password tot he password option.
+// This function is writing the password to the password option.
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
