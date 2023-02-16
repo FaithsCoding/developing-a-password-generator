@@ -1,3 +1,4 @@
+// Character array
 var characterArray = [
   "!",
   "#",
@@ -31,9 +32,9 @@ var characterArray = [
   "}",
   "~",
 ];
-// Numeric characters
+// Numeric characters array
 var numberArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-// Alphabetical characters
+// Alphabetical characters array
 var uppercaseLetterArray = [
   "A",
   "B",
@@ -91,13 +92,19 @@ var lowercaseLetterArray = [
   "z",
 ];
 
+//This function is used to allow a random selection of array characters highlighted in the above list.
+//Math.floor is rounding down the Math.Random which is being multipled by array length.
 function getRandom(array) {
   var ranIndex = Math.floor(Math.random() * array.length);
   var element = array[ranIndex];
-
+  //The return element is displaying what this function has completed.
   return element;
 }
 
+//Below uses prompt, alert and confirm methods allowing the user to choose password options.
+//prompt - asks a question
+//confirm - has the options 'ok' or 'cancel' which log as boolean values true or false.
+//alert - stops the user from proceeding if they don't choose any of the options.
 function passwordOptions() {
   var pwdLength = parseInt(
     prompt("How many characters should your password be?")
@@ -112,6 +119,7 @@ function passwordOptions() {
     "Do you want to include lowercase letters?"
   );
   var includeNumbers = confirm("Do you want to include numbers?");
+
   var includeSpecialCharacters = confirm(
     "Do you want to include special characters?"
   );
@@ -125,7 +133,7 @@ function passwordOptions() {
     alert("Please choose value");
     return null;
   }
-
+  //we are using this object to return the users input
   var passwordOptionsObj = {
     length: pwdLength,
     upper: includeUppercaseLetters,
@@ -137,6 +145,9 @@ function passwordOptions() {
   return passwordOptionsObj;
 }
 
+//This function is using the possible characters from each array and concatinating (adding) them with another array.
+//From that we are asking it to gurantee a random character and push that into each array.
+//A console log is allowing us as a developer to see the information this is producing.
 function generatePassword() {
   var pwdOptionsObj = passwordOptions();
 
@@ -158,9 +169,9 @@ function generatePassword() {
     console.log(guranteeCharacters);
   }
 
-  if (pwdOptionsObj.numbers) {
+  if (pwdOptionsObj.number) {
     possibleCharacters = possibleCharacters.concat(numberArray);
-    guranteeCharacters.push(getRandom(number));
+    guranteeCharacters.push(getRandom(numberArray));
     console.log(possibleCharacters);
     console.log(guranteeCharacters);
   }
@@ -172,16 +183,20 @@ function generatePassword() {
     console.log(guranteeCharacters);
   }
 
+  //This for loop is telling JS if pwdOptionsObj is less then 0 then i++ (add 1). This causes the code to keep looping.
+  //For example if user chooses 30 this will loop 30 times to create that password.
   for (var i = 0; i < pwdOptionsObj.length; i++) {
     finalPassword.push(getRandom(possibleCharacters));
+    console.log(finalPassword);
   }
+  //This return is displaying the var finalPassword which is joined with the arrays.
   return finalPassword.join("");
 }
 
-// Assignment Code
+// The query selector is a method used to return elements that match with another selector.
 var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
+// This function is writing the password tot he password option.
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
@@ -189,5 +204,5 @@ function writePassword() {
   passwordText.value = password;
 }
 
-// Add event listener to generate button
+// The event listner is what runs all the above code when the user clicks on the button stated in the HTML.
 generateBtn.addEventListener("click", writePassword);
